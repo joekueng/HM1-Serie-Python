@@ -7,7 +7,8 @@ def s2n_naiv(s: float) -> float:
 
 def s2n_stabil(s: float) -> float:
     t = max(0.0, 1.0 - (s*s)/4.0)
-    return (s*s) / (2.0*(1.0 + math.sqrt(t)))
+    return s / math.sqrt(2.0*(1.0 + math.sqrt(t)))
+
 n0 = 6
 s_naiv = 1.0
 s_stab = 1.0
@@ -30,6 +31,10 @@ zwei_pi = 2.0 * math.pi
 print(f"Letzter m-Wert:           m = {m_vals[-1]:.0f}")
 print(f"Naiv:    m*s_m = {p_naiv[-1]:.15f}   Fehler = {abs(p_naiv[-1]-zwei_pi):.3e}")
 print(f"Stabil:  m*s_m = {p_stab[-1]:.15f}   Fehler = {abs(p_stab[-1]-zwei_pi):.3e}")
+err = abs(p_stab[-1] - 2*math.pi)/(2*math.pi)
+print(f"relativer Fehler stabil = {err:.3e}")
+
+
 
 plt.figure()
 plt.plot(m_vals, p_naiv, label="naive Formel")
